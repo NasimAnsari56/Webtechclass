@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Calculator</title>
+    <a href="scientific calculator.html">scientific calculator</a> |
+<a href="simple calculator.html">simple calculator</a> |
+
+
+    <style>
+        body{
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+            background-color:aqua;
+            border-color:green
+        }
+        button{
+            padding: 8px 15px;
+            margin: 5px;
+        }
+        button:hover{
+            cursor:pointer;
+            background-color: blue;
+            padding:18px;
+        }
+        div{
+            background-color: brown;
+            width:300px;
+        }
+        input{
+            background-color: skyblue;
+            padding:10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Simple Calculator</h1>
+
+    Num1: <input type="number" id="n1"><br><br>
+    Num2: <input type="number" id="n2"><br><br>
+
+    <button onclick="calculator('+')">+</button>
+    <button onclick="calculator('-')">-</button>
+    <button onclick="calculator('*')">*</button>
+    <button onclick="calculator('/')">/</button>
+
+    <h2 id="result">Result:</h2>
+
+    <script>
+        function calculator(operator) {
+            var num1 = Number(document.getElementById("n1").value);
+            var num2 = Number(document.getElementById("n2").value);
+            var result;
+
+            if (operator == "+") {
+                result = num1 + num2;
+            }
+            else if (operator == "-") {
+                result = num1 - num2;
+            }
+            else if (operator == "*") {
+                result = num1 * num2;
+            }
+            else if (operator == "/") {
+                if (num2 == 0) {
+                    result = "Cannot divide by zero";
+                } else {
+                    result = num1 / num2;
+                }
+            }
+
+            document.getElementById("result").innerHTML = "Result: " + result;
+        }
+    </script>
+
+</body>
+</html>
