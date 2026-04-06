@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Registration Form</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #1f3c88, #00c6ff, #00ff94);
+}
+
+
+.top-heading{
+    text-align:center;
+    color:white;
+    font-size:30px;
+    font-weight:bold;
+    padding:20px 0;
+}
+
+
+.container{
+    background:aqua;
+    width:350px;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0, 0, 0, 0.3);
+    margin:0 auto 40px auto;
+}
+
+input, select, textarea{
+    width:100%;
+    padding:8px;
+    margin:6px 0 12px 0;
+    border:none;
+    border-radius:5px;
+}
+
+.gender{
+    margin-bottom:10px;
+}
+
+.gender input{
+    width:auto;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    background:linear-gradient(to right, #0066ff, #0033cc);
+    color:white;
+    border:none;
+    border-radius:5px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:0.9;
+}
+
+#output{
+    margin-top:15px;
+    background:white;
+    padding:10px;
+    border-radius:5px;
+    font-size:14px;
+    white-space:pre-wrap;
+}
+</style>
+</head>
+
+<body>
+
+
+<div class="top-heading">
+    Registration Form
+</div>
+
+<div class="container">
+
+    <form onsubmit="return showData()">
+
+        Full Name
+        <input type="text" id="fullname" required>
+
+        Username
+        <input type="text" id="username" required>
+
+        Password
+        <input type="password" id="password" required>
+
+        Confirm Password
+        <input type="password" id="confirm" required>
+
+        Email
+        <input type="email" id="email" required>
+
+        Date of Birth
+        <input type="date" id="dob" required>
+
+        Gender
+        <div class="gender">
+            <input type="radio" name="gender" value="Male" required> Male
+            <input type="radio" name="gender" value="Female"> Female
+            <input type="radio" name="gender" value="Other"> Other
+        </div>
+
+        Course
+        <select id="course" required>
+            <option value="">Select Course</option>
+            <option>B.Tech</option>
+            <option>BCA</option>
+            <option>MCA</option>
+            <option>BBA</option>
+        </select>
+
+        Message
+        <textarea id="message" rows="3" placeholder="Enter your message here..."></textarea>
+
+        <button type="submit">Submit</button>
+
+    </form>
+
+    <div id="output"></div>
+
+</div>
+
+<script>
+function showData(){
+
+    var password = document.getElementById("password").value;
+    var confirm = document.getElementById("confirm").value;
+
+    if(password !== confirm){
+        alert("Passwords do not match!");
+        return false;
+    }
+
+    var gender = document.querySelector('input[name="gender"]:checked').value;
+
+    var data =
+    "Full Name: " + document.getElementById("fullname").value + "\n" +
+    "Username: " + document.getElementById("username").value + "\n" +
+    "Email: " + document.getElementById("email").value + "\n" +
+    "Date of Birth: " + document.getElementById("dob").value + "\n" +
+    "Gender: " + gender + "\n" +
+    "Course: " + document.getElementById("course").value + "\n" +
+    "Message: " + document.getElementById("message").value;
+
+    document.getElementById("output").innerText = data;
+
+    return false;
+}
+</script>
+
+</body>
+</html>
