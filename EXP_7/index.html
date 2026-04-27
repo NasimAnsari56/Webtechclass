@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Students</title>
+<style>
+    body {
+        font-family: Arial;
+        background-color: #cfd8dc;
+    }
+
+    .container {
+        width: 80%;
+        margin: 50px auto;
+        background: #eee;
+        padding: 30px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .nav {
+        margin-bottom: 20px;
+    }
+
+    .nav a {
+        margin: 0 8px;
+        color: #2b78c5;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+    }
+
+    input, select {
+        padding: 10px;
+        margin: 10px;
+        width: 200px;
+    }
+
+    button {
+        padding: 10px 15px;
+        margin: 10px;
+        background: #2b78c5;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+
+    th {
+        background: #2b78c5;
+        color: white;
+        padding: 10px;
+    }
+
+    td {
+        padding: 10px;
+        border: 1px solid #aaa;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="nav">
+        <a href="../index.html">All Experiments</a>
+        <a href="index.html">EXP_7 Home</a>
+    </div>
+
+    <h2>Students</h2>
+
+    <input type="text" id="search" placeholder="Search student">
+    
+    <select id="department">
+        <option value="all">All Departments</option>
+        <option value="CSE">CSE</option>
+        <option value="ECE">ECE</option>
+        <option value="ME">ME</option>
+    </select>
+
+    <br>
+
+    <button onclick="capitalizeNames()">Capitalize</button>
+    <button onclick="lowerNames()">Lower</button>
+    <button onclick="showTopper()">Topper</button>
+
+    <table id="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+</div>
+
+<script>
+let students = [
+    {name:"rahul", dept:"CSE", score:82},
+    {name:"sita", dept:"CSE", score:91},
+    {name:"hari", dept:"ECE", score:76},
+    {name:"rina", dept:"ECE", score:88},
+    {name:"gita", dept:"ME", score:69},
+    {name:"kishan", dept:"ME", score:95},
+    {name:"arjun", dept:"CSE", score:73},
+    {name:"kunal", dept:"ECE", score:84},
+    {name:"laxmi", dept:"ME", score:78},
+    {name:"rohan", dept:"CSE", score:89}
+];
+
+function display(data) {
+    let tbody = document.getElementById("tbody");
+    tbody.innerHTML = "";
+
+    data.forEach(s => {
+        tbody.innerHTML += `
+        <tr>
+            <td>${s.name}</td>
+            <td>${s.dept}</td>
+            <td>${s.score}</td>
+        </tr>`;
+    });
+}
+
+display(students);
+
+document.getElementById("search").addEventListener("input", filterData);
+document.getElementById("department").addEventListener("change", filterData);
+
+function filterData() {
+    let search = document.getElementById("search").value.toLowerCase();
+    let dept = document.getElementById("department").value;
+
+    let filtered = students.filter(s =>
+        s.name.includes(search) &&
+        (dept === "all" || s.dept === dept)
+    );
+
+    display(filtered);
+}
+
+function capitalizeNames() {
+    students.forEach(s => s.name = s.name.toUpperCase());
+    display(students);
+}
+
+function lowerNames() {
+    students.forEach(s => s.name = s.name.toLowerCase());
+    display(students);
+}
+
+function showTopper() {
+    let rows = document.querySelectorAll("#tbody tr");
+
+    let max = -1;
+    let topperRow = null;
+
+    rows.forEach(row => {
+        let score = parseInt(row.cells[2].innerText);
+
+        if (score > max) {
+            max = score;
+            topperRow = row;
+        }
+    });
+
+    rows.forEach(row => row.style.backgroundColor = "");
+
+    if (topperRow) {
+        topperRow.style.backgroundColor = "yellow";
+    }
+}
+
+</script>
+
+</body>
+</html>
